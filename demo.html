@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Demo - Food Recognition Using Computer Vision</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ml5/0.6.0/ml5.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="introduction.html">Introduction</a></li>
+                <li><a href="technical_overview.html">Technical Overview</a></li>
+                <li><a href="case_studies.html">Case Studies</a></li>
+                <li><a href="demo.html">Interactive Demo</a></li>
+                <li><a href="bibliography.html">Annotated Bibliography</a></li>
+                <li><a href="conclusion.html">Conclusion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Interactive Demo Section -->
+    <section class="demo-section">
+        <h1>Interactive Food Recognition Demo</h1>
+        <p>In this interactive demo, you can upload an image of food, and the machine learning model will attempt to recognize it using a Convolutional Neural Network (CNN) pre-trained on the Food-101 dataset.</p>
+
+        <!-- Upload Form -->
+        <div class="upload-container">
+            <input type="file" id="uploadImage" accept="image/*">
+            <button onclick="predictFood()">Recognize Food</button>
+        </div>
+
+        <!-- Output Section -->
+        <div id="output">
+            <p><strong>Prediction:</strong> <span id="result"></span></p>
+        </div>
+
+        <canvas id="canvas"></canvas>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Food Recognition Research Tutorial. Created by [Your Name]</p>
+    </footer>
+
+    <!-- JavaScript to handle image recognition -->
+    <script>
+        let classifier;
+        let image;
+
+        // Load the model
+        function preload() {
+            classifier = ml5.imageClassifier('Food-101', modelReady);
+        }
+
+        function modelReady() {
+            console.log("Model Loaded!");
+        }
+
+        function predictFood() {
+            const imageFile = document.getElementById('uploadImage').files[0];
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = function () {
+                        const canvas = document.getElementById('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                        classifier.classify(canvas, gotResult);
+                    };
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                alert('Please upload an image first!');
+            }
+        }
+
+        function gotResult(error, results) {
+            if (error) {
+                console.error(error);
+                return;
+            }
+            document.getElementById('result').innerText = results[0].label;
+        }
+
+        window.onload = preload;
+    </script>
+</body>
+</html>
