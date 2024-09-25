@@ -42,7 +42,7 @@ nav ul li a:hover {
     background-position: center;
     text-align: center;
     padding: 5rem 1rem;
-    color: white; /* Ensure text is white */
+    color: black;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add text shadow for better visibility */
 }
 
