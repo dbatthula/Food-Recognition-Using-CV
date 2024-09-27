@@ -3,63 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technical Overview - Food Recognition Using Computer Vision</title>
+    <meta name="description" content="Technical overview of food recognition using computer vision">
+    <title>Technical Overview | Food Recognition Tutorial</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
     <header>
+        <h1>Technical Overview</h1>
         <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="introduction.html">Introduction</a></li>
-                <li><a href="technical_overview.html">Technical Overview</a></li>
-                <li><a href="case_studies.html">Case Studies</a></li>
-                <li><a href="demo.html">Interactive Demo</a></li>
-                <li><a href="bibliography.html">Annotated Bibliography</a></li>
-                <li><a href="conclusion.html">Conclusion</a></li>
-                <li><a href="acknowledgements.html">Acknowledgements</a></li>
-                <li><a href="glossary.html">Glossary</a></li>
-                <li><a href="faq.html">FAQs</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="media_credits.html">Media Credits</a></li>
-            </ul>
+            <a href="index.html">Home</a>
+            <a href="technical_overview.html" class="active">Technical Overview</a>
+            <a href="case_studies.html">Case Studies</a>
+            <a href="demo.html">Interactive Demo</a>
+            <a href="bibliography.html">Bibliography</a>
+            <a href="conclusion.html">Conclusion</a>
         </nav>
     </header>
 
     <section>
-        <h2>Convolutional Neural Network (CNN) Architecture</h2>
-        <p>Convolutional Neural Networks (CNNs) are the backbone of food recognition models. CNNs are composed of layers that allow the model to detect features in images such as edges, textures, and shapes. This architecture is particularly powerful in food image analysis as it can learn the intricate details necessary for differentiating between similar-looking food items.</p>
-        <img src="https://commons.wikimedia.org/wiki/File:Typical_cnn.png" alt="CNN Architecture Diagram" class="img-responsive">
-        <figcaption>Architecture of a Convolutional Neural Network used for food recognition (Source: Wikimedia Commons).</figcaption>
-    </section>
+        <h2>Convolutional Neural Networks (CNNs) for Food Recognition</h2>
+        <p>Convolutional Neural Networks (CNNs) are a deep learning method widely used for tasks like image classification, object detection, and feature extraction. CNNs are particularly effective in handling image data due to their deep structure and the convolution process, which allows for object detection in various domains, including food classification.</p>
+        <p>CNNs are composed of two main parts: the feature extraction layer and the fully connected layer.</p>
+        <h3>Convolution Layer</h3>
+        <p>This layer detects patterns in the image by applying filters to the input image. For instance, in a CNN architecture, a filter slides over the image, multiplying corresponding pixel values to detect textures and edges.</p>
+        <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*D6iRfzDkz-sEzyjYoVZ73w.gif" alt="CNN Architecture Diagram" class="img-responsive">
+        <figcaption>Figure 1: Architecture of a Convolutional Neural Network used for food recognition.</figcaption>
 
-    <section>
-        <h2>Sample Images from the Food-101 Dataset</h2>
-        <p>The Food-101 dataset contains over 101,000 images across 101 categories of food. These images are used for training and testing machine learning models. By learning from this diverse dataset, CNN models can generalize better to unseen food images.</p>
-        <img src="https://www.vision.ee.ethz.ch/datasets_extra/food-101/" alt="Food-101 Dataset Samples" class="img-responsive">
-        <figcaption>Example images from the Food-101 dataset used for CNN training (Source: Vision Group, ETH Zurich).</figcaption>
-    </section>
+        <h3>Pooling Layer</h3>
+        <p>Following convolution, the pooling layer reduces the size of the data by partitioning it and selecting the maximum value from each section (max-pooling), simplifying the data while retaining important features.</p>
+        <img src="https://miro.medium.com/v2/resize:fit:786/format:webp/0*lIcR0gOMK0xzTr6_.png" alt="Feature Extraction Visualization" class="img-responsive">
+        <figcaption>Figure 2: Feature extraction process in CNN layers, showing the progressive identification of visual cues.</figcaption>
 
-    <section>
-        <h2>Feature Extraction in CNN Layers</h2>
-        <p>CNN layers extract features from food images progressively, starting from simple features like edges to more complex structures like shapes and textures. This feature extraction process is crucial in accurately identifying food items.</p>
-        <img src="https://www.researchgate.net/figure/Feature-extraction-stages-in-CNN_fig2_341920288" alt="Feature Extraction Visualization" class="img-responsive">
-        <figcaption>Feature extraction process in CNN layers, showing the progressive identification of visual cues (Source: ResearchGate).</figcaption>
-    </section>
+        <h3>Fully Connected Layer</h3>
+        <p>At the end, this layer combines all the features from the previous layers and uses a softmax function to classify the object based on probability.</p>
 
-    <section>
-        <h2>Activation Maps in CNNs</h2>
-        <p>Activation maps visualize which parts of an image the CNN is focusing on to classify it. These maps help us understand how the model distinguishes between different food items by identifying important textures, colors, and shapes.</p>
-        <img src="https://www.analyticsvidhya.com/blog/2019/01/build-your-own-convolutional-neural-network-cnn-in-10-minutes/" alt="Activation Map Visualization" class="img-responsive">
-        <figcaption>Activation map of a CNN showing the areas of the image that contribute to food classification (Source: Analytics Vidhya).</figcaption>
-    </section>
-
-    <section>
-        <h2>System Workflow for Food Recognition</h2>
-        <p>The workflow for food recognition typically includes image acquisition, pre-processing, feature extraction, classification, and output. Each step is crucial for the system to effectively recognize and classify food items.</p>
-        <img src="https://towardsdatascience.com/the-ml-system-lifecycle-process-overview-d5ba58430d9b" alt="ML System Workflow Diagram" class="img-responsive">
-        <figcaption>Workflow of a machine learning system, similar to that used in food recognition (Source: Towards Data Science).</figcaption>
+        <h3>CNN Application in Food Recognition</h3>
+        <p>In food recognition, CNNs can be used to classify images of dishes by processing images under consistent conditions like brightness and distance. For example, a dataset could include foods like rice, fried chicken, and tofu, captured in uniform settings for accurate analysis.</p>
+        <img src="images/food_101_dataset.png" alt="Food-101 Dataset Samples" class="img-responsive">
+        <figcaption>Figure 3: Example images from the Food-101 dataset used for CNN training.</figcaption>
     </section>
 
     <footer>
