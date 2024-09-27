@@ -27,40 +27,43 @@
         </nav>
     </header>
 
-    <!-- Technical Overview Section -->
-    <section class="technical-overview">
-        <h1>Technical Overview</h1>
-
-        <h2>Convolutional Neural Networks (CNNs)</h2>
-        <p>Convolutional Neural Networks (CNNs) are the backbone of modern food recognition systems. CNNs automatically learn hierarchical features from images, such as edges, textures, and more complex patterns, which make them ideal for recognizing various food items in images.</p>
-        <p>CNNs consist of several layers:</p>
-        <ul>
-            <li><strong>Convolutional Layers:</strong> Extract low-level features like edges, corners, and textures.</li>
-            <li><strong>Pooling Layers:</strong> Reduce the spatial dimensions of the data to focus on the most prominent features while maintaining important information.</li>
-            <li><strong>Fully Connected Layers:</strong> Perform classification tasks by mapping features to specific labels (e.g., food items).</li>
-        </ul>
-
-        <h2>Key Datasets for Food Recognition</h2>
-        <p>Training CNNs for food recognition requires large, labeled datasets of food images. Some widely used datasets include:</p>
-        <ul>
-            <li><strong>Food-101:</strong> Contains 101,000 images of 101 food categories. It's one of the largest datasets used for food classification tasks.</li>
-            <li><strong>UEC Food-256:</strong> Contains 256 different types of Japanese food and is used for more detailed segmentation tasks.</li>
-            <li><strong>VIREO Food-172:</strong> Specializes in Chinese food with 172 food categories, providing diversity in food culture and representation.</li>
-        </ul>
-
-        <h2>Food Image Segmentation</h2>
-        <p>Segmentation in food recognition refers to the process of isolating individual food items within an image, which is essential for multi-item food classification and portion estimation. Techniques such as semantic segmentation help identify the boundaries of food items, which can then be passed to classification algorithms for further analysis.</p>
-
-        <h2>Classification and Identification</h2>
-        <p>Once segmented, food images are passed through a classification network, where CNNs map extracted features to predefined food categories. State-of-the-art models such as **Faster R-CNN** or **Inception-v3** are commonly used to perform this task due to their high accuracy in object detection and classification.</p>
-
-        <h2>Calorie and Weight Estimation</h2>
-        <p>Food recognition systems are not just limited to identifying food items but are also extended to estimate the portion sizes and calories. Using 3D models or image-based algorithms, the system can estimate the food’s volume and weight, which is then mapped to caloric content for dietary analysis.</p>
+    <section>
+        <h2>Convolutional Neural Network (CNN) Architecture</h2>
+        <p>Convolutional Neural Networks (CNNs) are the backbone of food recognition models. CNNs are composed of layers that allow the model to detect features in images such as edges, textures, and shapes. This architecture is particularly powerful in food image analysis as it can learn the intricate details necessary for differentiating between similar-looking food items.</p>
+        <img src="https://commons.wikimedia.org/wiki/File:Typical_cnn.png" alt="CNN Architecture Diagram" class="img-responsive">
+        <figcaption>Architecture of a Convolutional Neural Network used for food recognition (Source: Wikimedia Commons).</figcaption>
     </section>
 
-    <!-- Footer -->
+    <section>
+        <h2>Sample Images from the Food-101 Dataset</h2>
+        <p>The Food-101 dataset contains over 101,000 images across 101 categories of food. These images are used for training and testing machine learning models. By learning from this diverse dataset, CNN models can generalize better to unseen food images.</p>
+        <img src="https://www.vision.ee.ethz.ch/datasets_extra/food-101/" alt="Food-101 Dataset Samples" class="img-responsive">
+        <figcaption>Example images from the Food-101 dataset used for CNN training (Source: Vision Group, ETH Zurich).</figcaption>
+    </section>
+
+    <section>
+        <h2>Feature Extraction in CNN Layers</h2>
+        <p>CNN layers extract features from food images progressively, starting from simple features like edges to more complex structures like shapes and textures. This feature extraction process is crucial in accurately identifying food items.</p>
+        <img src="https://www.researchgate.net/figure/Feature-extraction-stages-in-CNN_fig2_341920288" alt="Feature Extraction Visualization" class="img-responsive">
+        <figcaption>Feature extraction process in CNN layers, showing the progressive identification of visual cues (Source: ResearchGate).</figcaption>
+    </section>
+
+    <section>
+        <h2>Activation Maps in CNNs</h2>
+        <p>Activation maps visualize which parts of an image the CNN is focusing on to classify it. These maps help us understand how the model distinguishes between different food items by identifying important textures, colors, and shapes.</p>
+        <img src="https://www.analyticsvidhya.com/blog/2019/01/build-your-own-convolutional-neural-network-cnn-in-10-minutes/" alt="Activation Map Visualization" class="img-responsive">
+        <figcaption>Activation map of a CNN showing the areas of the image that contribute to food classification (Source: Analytics Vidhya).</figcaption>
+    </section>
+
+    <section>
+        <h2>System Workflow for Food Recognition</h2>
+        <p>The workflow for food recognition typically includes image acquisition, pre-processing, feature extraction, classification, and output. Each step is crucial for the system to effectively recognize and classify food items.</p>
+        <img src="https://towardsdatascience.com/the-ml-system-lifecycle-process-overview-d5ba58430d9b" alt="ML System Workflow Diagram" class="img-responsive">
+        <figcaption>Workflow of a machine learning system, similar to that used in food recognition (Source: Towards Data Science).</figcaption>
+    </section>
+
     <footer>
-        <p>&copy; 2024 Food Recognition Research Tutorial. Created by Divya Batthula</p>
+        <p>&copy; 2024 Food Recognition Tutorial. All rights reserved.</p>
     </footer>
 </body>
 </html>
