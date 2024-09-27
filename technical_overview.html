@@ -39,6 +39,7 @@
             text-decoration: none;
             color: #333;
             font-weight: bold;
+            cursor: pointer;
         }
 
         .sidebar ul li a:hover {
@@ -50,6 +51,11 @@
             margin-left: 270px;
             padding: 20px;
             width: 100%;
+        }
+
+        /* Hide sections initially */
+        .section-content {
+            display: none;
         }
 
         /* Image styling */
@@ -77,20 +83,40 @@
     </style>
 </head>
 <body>
+     <!-- Navigation Bar -->
+ <header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="introduction.html">Introduction</a></li>
+            <li><a href="technical_overview.html">Technical Overview</a></li>
+            <li><a href="case_studies.html">Case Studies</a></li>
+            <li><a href="demo.html">Interactive Demo</a></li>
+            <li><a href="bibliography.html">Annotated Bibliography</a></li>
+            <li><a href="conclusion.html">Conclusion</a></li>
+            <li><a href="acknowledgements.html">Acknowledgements</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="media_credits.html">Media Credits</a></li>
+        </ul>
+    </nav>
+</header>
+
     <!-- Sidebar for navigation -->
     <div class="sidebar">
         <h3>On This Page</h3>
         <ul>
-            <li><a href="#cnn">Convolutional Neural Networks (CNNs)</a></li>
-            <li><a href="#sample-images">Sample Images from Food-101 Dataset</a></li>
-            <li><a href="#food-classification">Food Classification and Identification</a></li>
-            <li><a href="#food-weight">Food Weight Estimation</a></li>
+            <li><a onclick="showSection('cnn')">Convolutional Neural Networks (CNNs)</a></li>
+            <li><a onclick="showSection('sample-images')">Sample Images from Food-101 Dataset</a></li>
+            <li><a onclick="showSection('food-classification')">Food Classification and Identification</a></li>
+            <li><a onclick="showSection('food-weight')">Food Weight Estimation</a></li>
         </ul>
     </div>
 
     <!-- Main content area -->
     <div class="main-content">
-        <section id="cnn">
+        <section id="cnn" class="section-content">
             <h2>Convolutional Neural Networks (CNNs) for Food Recognition</h2>
             <p>Convolutional Neural Networks (CNNs) are a deep learning method widely used for tasks like image classification, object detection, and feature extraction. CNNs are particularly effective in handling image data due to their deep structure and the convolution process, which allows for object detection in various domains, including food classification.</p>
             <p>CNNs are composed of two main parts: the feature extraction layer and the fully connected layer.</p>
@@ -105,25 +131,22 @@
             
             <h3>Fully Connected Layer</h3>
             <p>At the end, this layer combines all the features from the previous layers and uses a softmax function to classify the object based on probability.</p>
-
-            <h3>CNN Application in Food Recognition</h3>
-            <p>In food recognition, CNNs can be used to classify images of dishes by processing images under consistent conditions like brightness and distance. For example, a dataset could include foods like rice, fried chicken, and tofu, captured in uniform settings for accurate analysis.</p>
         </section>
 
-        <section id="sample-images">
+        <section id="sample-images" class="section-content">
             <h2>Sample Images from the Food-101 Dataset</h2>
             <p>The Food-101 dataset contains over 101,000 images across 101 categories of food. These images are used for training and testing machine learning models. By learning from this diverse dataset, CNN models can generalize better to unseen food images.</p>
             <img src="https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/static/img/food-101.jpg" alt="Food-101 Dataset Samples" class="img-responsive">
         </section>
 
-        <section id="food-classification">
+        <section id="food-classification" class="section-content">
             <h2>Food Classification and Identification</h2>
             <p>Food classification systems aim to categorize food items into predefined categories such as "pizza," "pasta," or "salad." Convolutional Neural Networks (CNNs) are commonly used for multi-class classification tasks, significantly improving the accuracy of food identification in comparison to traditional methods like Support Vector Machines (SVMs) and k-Nearest Neighbors (k-NN).</p>
             <p>One advanced model for food classification is the <strong>DeepFood</strong> architecture, which utilizes CNNs for feature extraction and refinement stages to improve classification accuracy. It helps recognize complex food items in images.</p>
             <img src="https://production-media.paperswithcode.com/datasets/samples2.jpeg" alt="Multi-Class Food Classification" class="img-responsive">
         </section>
 
-        <section id="food-weight">
+        <section id="food-weight" class="section-content">
             <h2>Food Weight Estimation</h2>
             <p>Estimating the weight of food items from images is critical for nutritional analysis and calorie estimation. The challenge lies in deriving weight information from 2D images, which usually only contain texture, color, and basic shape information. Several approaches have been proposed to address this, as highlighted in studies like those by <a href="https://ieeexplore.ieee.org/document/6556817">Ye He et al., 2013</a>.</p>
             <p>One common method is to use a combination of image segmentation and depth estimation to estimate the volume of food on a plate. By leveraging datasets annotated with both food type and corresponding weight, models can be trained to predict the portion size of specific foods.</p>
@@ -136,5 +159,22 @@
             <p>&copy; 2024 Food Recognition Tutorial. All rights reserved.</p>
         </footer>
     </div>
+
+    <!-- JavaScript for toggling content -->
+    <script>
+        // Function to show a specific section and hide the others
+        function showSection(sectionId) {
+            var sections = document.getElementsByClassName('section-content');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = 'none';  // Hide all sections
+            }
+            document.getElementById(sectionId).style.display = 'block';  // Show the selected section
+        }
+
+        // Automatically show the first section on page load
+        window.onload = function() {
+            showSection('cnn');
+        }
+    </script>
 </body>
 </html>
