@@ -34,29 +34,32 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* Hero Section */
+/* Hero Section *//* Hero Section */
 .hero {
     background-image: url('images/hero_food_recognition.jpg');
     background-size: cover;
     background-position: center;
     text-align: center;
     padding: 5rem 1rem;
-    color: black;
+    color: white; /* Ensure text is white */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add text shadow for better visibility */
 }
 
 .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
+    color: #ffffff; /* Ensures header text stays white */
 }
 
 .hero p {
     font-size: 1.5rem;
     margin-bottom: 2rem;
+    color: #f0f0f0; /* Slightly lighter text color */
 }
 
 .cta-button {
     background-color: #ff6347;
+    color: white;
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 5px;
