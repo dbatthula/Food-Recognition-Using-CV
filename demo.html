@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Demo - Food Recognition Using Computer Vision</title>
+    <title>Interactive Quiz - Food Recognition Using Computer Vision</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ml5/0.6.0/ml5.min.js"></script>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -17,34 +15,56 @@
                 <li><a href="introduction.html">Introduction</a></li>
                 <li><a href="technical_overview.html">Technical Overview</a></li>
                 <li><a href="case_studies.html">Case Studies</a></li>
-                <li><a href="demo.html">Interactive Demo</a></li>
+                <li><a href="demo.html">Interactive Quiz</a></li>
                 <li><a href="bibliography.html">Annotated Bibliography</a></li>
                 <li><a href="conclusion.html">Conclusion</a></li>
-                <li><a href="glossary.html">Glossary</a></li>
-                <li><a href="faq.html">FAQs</a></li>
-                <li><a href="contact.html">Contact</a></li>
                 <li><a href="media_credits.html">Media Credits</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Interactive Demo Section -->
-    <section class="demo-section">
-        <h1>Interactive Food Recognition Demo</h1>
-        <p>In this interactive demo, you can upload an image of food, and the machine learning model will attempt to recognize it using a Convolutional Neural Network (CNN) pre-trained on the Food-101 dataset.</p>
+    <!-- Interactive Quiz Section -->
+    <section class="quiz-section">
+        <h1>Food Recognition Quiz</h1>
+        <p>Test your knowledge of food recognition using CNNs!</p>
 
-        <!-- Upload Form -->
-        <div class="upload-container">
-            <input type="file" id="uploadImage" accept="image/*">
-            <button onclick="predictFood()">Recognize Food</button>
-        </div>
+        <form id="quizForm">
+            <!-- Question 1 -->
+            <label for="q1">1. What is the primary function of the convolution layer in a CNN?</label><br>
+            <input type="radio" name="q1" value="a"> A. To reduce the dimensions of the input data.<br>
+            <input type="radio" name="q1" value="b"> B. To detect patterns such as edges and textures.<br>
+            <input type="radio" name="q1" value="c"> C. To fully connect all neurons.<br><br>
 
-        <!-- Output Section -->
-        <div id="output">
-            <p><strong>Prediction:</strong> <span id="result"></span></p>
-        </div>
+            <!-- Question 2 -->
+            <label for="q2">2. What dataset is commonly used for food image classification?</label><br>
+            <input type="radio" name="q2" value="a"> A. ImageNet<br>
+            <input type="radio" name="q2" value="b"> B. COCO<br>
+            <input type="radio" name="q2" value="c"> C. Food-101<br><br>
 
-        <canvas id="canvas"></canvas>
+            <!-- Question 3 -->
+            <label for="q3">3. Which of the following is a drawback of CNNs?</label><br>
+            <input type="radio" name="q3" value="a"> A. CNNs require minimal computational resources.<br>
+            <input type="radio" name="q3" value="b"> B. CNNs struggle with occluded or mixed food items.<br>
+            <input type="radio" name="q3" value="c"> C. CNNs are highly accurate with very little training data.<br><br>
+
+            <!-- Question 4 -->
+            <label for="q4">4. What role does the pooling layer play in a CNN?</label><br>
+            <input type="radio" name="q4" value="a"> A. It removes irrelevant features.<br>
+            <input type="radio" name="q4" value="b"> B. It reduces the dimensionality of feature maps.<br>
+            <input type="radio" name="q4" value="c"> C. It transforms features into pixel values.<br><br>
+
+            <!-- Question 5 -->
+            <label for="q5">5. Which of the following tasks is CNN most suited for in food recognition?</label><br>
+            <input type="radio" name="q5" value="a"> A. Text-based food analysis.<br>
+            <input type="radio" name="q5" value="b"> B. Food image classification.<br>
+            <input type="radio" name="q5" value="c"> C. Speech recognition in food-related contexts.<br><br>
+
+            <!-- Submit button -->
+            <button type="button" onclick="checkQuiz()">Submit</button>
+        </form>
+
+        <!-- Quiz result output -->
+        <div id="quizResult" style="margin-top: 20px;"></div>
     </section>
 
     <!-- Footer -->
@@ -52,51 +72,31 @@
         <p>&copy; 2024 Food Recognition Research Tutorial. Created by Divya Batthula</p>
     </footer>
 
-    <!-- JavaScript to handle image recognition -->
+    <!-- JavaScript for quiz functionality -->
     <script>
-        let classifier;
-        let image;
+        function checkQuiz() {
+            var correctAnswers = {
+                q1: "b",
+                q2: "c",
+                q3: "b",
+                q4: "b",
+                q5: "b"
+            };
 
-        // Load the model
-        function preload() {
-            classifier = ml5.imageClassifier('Food-101', modelReady);
-        }
+            var form = document.getElementById("quizForm");
+            var score = 0;
+            var totalQuestions = 5;
 
-        function modelReady() {
-            console.log("Model Loaded!");
-        }
-
-        function predictFood() {
-            const imageFile = document.getElementById('uploadImage').files[0];
-            if (imageFile) {
-                const reader = new FileReader();
-                reader.onload = function (event) {
-                    const img = new Image();
-                    img.src = event.target.result;
-                    img.onload = function () {
-                        const canvas = document.getElementById('canvas');
-                        const ctx = canvas.getContext('2d');
-                        canvas.width = img.width;
-                        canvas.height = img.height;
-                        ctx.drawImage(img, 0, 0);
-                        classifier.classify(canvas, gotResult);
-                    };
-                };
-                reader.readAsDataURL(imageFile);
-            } else {
-                alert('Please upload an image first!');
+            for (var key in correctAnswers) {
+                var selectedAnswer = form.elements[key].value;
+                if (selectedAnswer === correctAnswers[key]) {
+                    score++;
+                }
             }
-        }
 
-        function gotResult(error, results) {
-            if (error) {
-                console.error(error);
-                return;
-            }
-            document.getElementById('result').innerText = results[0].label;
+            var result = document.getElementById("quizResult");
+            result.innerHTML = "<h2>Your score: " + score + " out of " + totalQuestions + "</h2>";
         }
-
-        window.onload = preload;
     </script>
 </body>
 </html>
