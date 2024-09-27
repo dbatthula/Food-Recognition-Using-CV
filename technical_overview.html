@@ -30,24 +30,48 @@
                 <li><a href="case_studies.html">Case Studies</a></li>
                 <li><a href="demo.html">Interactive Demo</a></li>
                 <li><a href="bibliography.html">Annotated Bibliography</a></li>
-                <li><a href="conclusion.html">Conclusion</a></li>
                 <li><a href="media_credits.html">Media Credits</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- CNN Overview -->
+    <!-- Main Content -->
     <section>
         <h2>Convolutional Neural Networks (CNNs) for Food Recognition</h2>
         <p>Convolutional Neural Networks (CNNs) are a deep learning method widely used for tasks like image classification, object detection, and feature extraction. CNNs are particularly effective in handling image data due to their deep structure and the convolution process, which allows for object detection in various domains, including food classification.</p>
+        <p>CNNs are composed of two main parts: the feature extraction layer and the fully connected layer.</p>
         
         <h3>Convolution Layer</h3>
-        <p>The convolution layer extracts image features using filters that slide over the input image to detect edges and textures.</p>
+        <p>This layer detects patterns in the image by applying filters to the input image. For instance, in a CNN architecture, a filter slides over the image, multiplying corresponding pixel values to detect textures and edges.</p>
+        <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*D6iRfzDkz-sEzyjYoVZ73w.gif" alt="CNN Architecture Diagram" class="img-responsive">
+        
+        <h3>Pooling Layer</h3>
+        <p>Following convolution, the pooling layer reduces the size of the data by partitioning it and selecting the maximum value from each section (max-pooling), simplifying the data while retaining important features.</p>
+        <img src="https://miro.medium.com/v2/resize:fit:786/format:webp/0*lIcR0gOMK0xzTr6_.png" alt="Feature Extraction Visualization" class="img-responsive">
+        
+        <h3>Fully Connected Layer</h3>
+        <p>At the end, this layer combines all the features from the previous layers and uses a softmax function to classify the object based on probability.</p>
+
+        <h3>CNN Application in Food Recognition</h3>
+        <p>In food recognition, CNNs can be used to classify images of dishes by processing images under consistent conditions like brightness and distance. For example, a dataset could include foods like rice, fried chicken, and tofu, captured in uniform settings for accurate analysis.</p>
+    </section>
+
+    <section>
+        <h2>Sample Images from the Food-101 Dataset</h2>
+        <p>The Food-101 dataset contains over 101,000 images across 101 categories of food. These images are used for training and testing machine learning models. By learning from this diverse dataset, CNN models can generalize better to unseen food images.</p>
+        <img src="https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/static/img/food-101.jpg" alt="Food-101 Dataset Samples" class="img-responsive">
+    </section>
+
+    <section>
+        <h2>Food Classification and Identification</h2>
+        <p>Food classification systems aim to categorize food items into predefined categories such as "pizza," "pasta," or "salad." Convolutional Neural Networks (CNNs) are commonly used for multi-class classification tasks, significantly improving the accuracy of food identification in comparison to traditional methods like Support Vector Machines (SVMs) and k-Nearest Neighbors (k-NN).</p>
+
+        <h3>Food Classification Example Using CNN</h3>
         <pre><code class="language-python">
 import tensorflow as tf
 from tensorflow.keras import layers, models
 
-# Sample CNN model
+# Sample CNN model for food classification
 model = models.Sequential([
     layers.Conv2D(32, (3, 3), activation='relu', input_shape=(150, 150, 3)),
     layers.MaxPooling2D((2, 2)),
@@ -60,112 +84,27 @@ model = models.Sequential([
     layers.Dense(101, activation='softmax')  # 101 food categories in Food-101 dataset
 ])
 
-model.summary()
-        </code></pre>
-
-        <h3>Pooling Layer</h3>
-        <p>Pooling layers downsample the input by selecting the maximum value from a feature map, reducing its dimensions while retaining important information.</p>
-        <pre><code class="language-python">
-# Max-pooling layer
-model.add(layers.MaxPooling2D((2, 2)))
-
-# Another convolution followed by max-pooling
-model.add(layers.Conv2D(64, (3, 3), activation='relu'))
-model.add(layers.MaxPooling2D((2, 2)))
-        </code></pre>
-
-        <h3>Fully Connected Layer</h3>
-        <p>After feature extraction, fully connected layers classify the food item based on the extracted features.</p>
-        <pre><code class="language-python">
-# Fully connected layer with softmax activation for classification
-model.add(layers.Flatten())
-model.add(layers.Dense(512, activation='relu'))
-model.add(layers.Dense(101, activation='softmax'))  # Output layer with 101 categories
-        </code></pre>
-
-        <h3>CNN Application in Food Recognition</h3>
-        <p>CNNs are effective in recognizing food by classifying images under consistent conditions like brightness and distance. For example, the model could classify dishes such as "rice," "fried chicken," or "tofu" using a dataset such as Food-101.</p>
-    </section>
-
-    <!-- Food Dataset Overview -->
-    <section>
-        <h2>Sample Images from the Food-101 Dataset</h2>
-        <p>The Food-101 dataset contains over 101,000 images across 101 categories of food, used to train and test machine learning models for food classification.</p>
-        <img src="https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/static/img/food-101.jpg" alt="Food-101 Dataset Samples" class="img-responsive">
-    </section>
-
-    <!-- Food Classification Overview -->
-    <section>
-        <h2>Food Classification and Identification</h2>
-        <p>Food classification systems aim to categorize food items into predefined categories like "pizza," "pasta," or "salad." CNNs have greatly improved the accuracy of food identification compared to traditional methods.</p>
-
-        <h3>Food Classification Example Using CNN</h3>
-        <pre><code class="language-python">
-# Training a CNN on Food-101 dataset for food classification
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-
-# Data generators for training and validation
-train_datagen = ImageDataGenerator(rescale=1./255)
-validation_datagen = ImageDataGenerator(rescale=1./255)
-
-train_generator = train_datagen.flow_from_directory(
-    'data/food-101/train',
-    target_size=(150, 150),
-    batch_size=32,
-    class_mode='categorical'
-)
-
-validation_generator = validation_datagen.flow_from_directory(
-    'data/food-101/validation',
-    target_size=(150, 150),
-    batch_size=32,
-    class_mode='categorical'
-)
-
 # Compile the model
 model.compile(optimizer='adam', 
               loss='categorical_crossentropy', 
               metrics=['accuracy'])
 
-# Train the model
-history = model.fit(train_generator, 
-                    epochs=10, 
-                    validation_data=validation_generator)
+# Model summary
+model.summary()
         </code></pre>
-        <p>After training, the model can classify images of food into categories based on the Food-101 dataset.</p>
+        <p>This code demonstrates how to build a CNN for food image classification using the Food-101 dataset, inspired by techniques like those described in the "DeepFood" paper by Liu et al.</p>
     </section>
 
-    <!-- Food Weight Estimation -->
     <section>
         <h2>Food Weight Estimation</h2>
-        <p>Estimating the weight of food items from images is important for nutritional analysis. The challenge is converting 2D images into weight predictions using features such as texture, shape, and depth.</p>
+        <p>Estimating the weight of food items from images is critical for nutritional analysis and calorie estimation. The challenge lies in deriving weight information from 2D images, which usually only contain texture, color, and basic shape information. Several approaches have been proposed to address this, as highlighted in studies like those by <a href="https://ieeexplore.ieee.org/document/6556817">Ye He et al., 2013</a>.</p>
 
-        <h3>Food Weight Estimation with Image Segmentation</h3>
-        <pre><code class="language-python">
-# Example of using OpenCV for food segmentation
-import cv2
+        <p>One common method is to use a combination of **image segmentation** and **depth estimation** to estimate the volume of food on a plate. By leveraging datasets annotated with both food type and corresponding weight, models can be trained to predict the portion size of specific foods.</p>
 
-# Load an image of food
-image = cv2.imread('food_image.jpg')
+        <p>Depth estimation techniques can either rely on stereo vision systems or use single image depth estimation algorithms, which apply machine learning techniques to infer the relative depth of objects. This can then be correlated with known food densities to estimate weight.</p>
 
-# Convert image to grayscale
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-# Apply a binary threshold to create a mask
-_, mask = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY)
-
-# Find contours of the food object
-contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-# Draw contours on the original image
-cv2.drawContours(image, contours, -1, (0, 255, 0), 2)
-
-# Display the segmented image
-cv2.imshow('Food Segmentation', image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-        </code></pre>
-        <p>By segmenting food from the background, we can estimate the volume and calculate the weight using known densities of the food item.</p>
+        <img src="https://ieeexplore.ieee.org/mediastore/IEEE/content/media/6596168/6607419/6607548/6607548-fig-5-source-large.gif" alt="Example of food weight estimation" class="img-responsive">
+        <figcaption>Examples of image segmentation and segmentation refinement. (a) shows the original images. (b) shows the initial segmentation results using local variation segmentation method. (c) shows the segmentation refinement using food classification confidence score. (d) shows the final image segmentation results after fast rejection.</figcaption>
     </section>
 
     <footer>
