@@ -67,6 +67,9 @@
         <p>Food classification systems aim to categorize food items into predefined categories such as "pizza," "pasta," or "salad." Convolutional Neural Networks (CNNs) are commonly used for multi-class classification tasks, significantly improving the accuracy of food identification in comparison to traditional methods like Support Vector Machines (SVMs) and k-Nearest Neighbors (k-NN).</p>
 
         <h3>Food Classification Example Using CNN</h3>
+        
+        <img src="https://production-media.paperswithcode.com/datasets/samples2.jpeg" alt="Multi-Class Food Classification" class="img-responsive">
+    
         <pre><code class="language-python">
 import tensorflow as tf
 from tensorflow.keras import layers, models
@@ -103,7 +106,7 @@ model.summary()
 
         <p>Depth estimation techniques can either rely on stereo vision systems or use single image depth estimation algorithms, which apply machine learning techniques to infer the relative depth of objects. This can then be correlated with known food densities to estimate weight.</p>
 
-        <img src="https://ieeexplore.ieee.org/mediastore/IEEE/content/media/6596168/6607419/6607548/6607548-fig-5-source-large.gif" alt="Example of food weight estimation" class="img-responsive">
+        <img src="images/food.gif" alt="Example of food weight estimation" class="img-responsive">
         <figcaption>Examples of image segmentation and segmentation refinement. (a) shows the original images. (b) shows the initial segmentation results using local variation segmentation method. (c) shows the segmentation refinement using food classification confidence score. (d) shows the final image segmentation results after fast rejection.</figcaption>
     </section>
 
